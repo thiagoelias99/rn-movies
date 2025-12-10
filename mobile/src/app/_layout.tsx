@@ -1,6 +1,22 @@
-import { Slot } from "expo-router"
+import { Stack } from "expo-router"
+import { SafeAreaView } from "react-native-safe-area-context"
 import "../global.css"
 
 export default function Layout() {
-  return <Slot />
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Stack>
+        <Stack.Screen name="(tabs)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen name="movie/[id]"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack>
+    </SafeAreaView>
+  )
 }

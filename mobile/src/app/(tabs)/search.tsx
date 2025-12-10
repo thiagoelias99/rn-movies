@@ -1,10 +1,11 @@
-import { Text, View } from "react-native"
+import { View, Text } from 'react-native'
+import React from 'react'
 
-export default function App() {
+export default function Search() {
   return (
     <View className="flex-1 items-center justify-center bg-white">
       <Text className="text-xl font-bold text-primary">
-        Welcome to Nativewind!
+        Busca
       </Text>
     </View>
   )
