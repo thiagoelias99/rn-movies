@@ -8,6 +8,10 @@
 - API Rest
 - Compose do ambiente de desenvolvimento `docker compose up -d`
 
+### Figma Design
+
+- [https://www.figma.com/design/c6NHYQem8G59odVSijIjl2/Movie-App-w--React-Native?node-id=2-2&p=f](https://www.figma.com/design/c6NHYQem8G59odVSijIjl2/Movie-App-w--React-Native?node-id=2-2&p=f)
+
 ### Iniciar Appwrite
 
 #### Instalação
@@ -36,3 +40,4 @@ docker run -it --rm ^
 
 - Registrar usuário
 - Criar projeto
+
