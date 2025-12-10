@@ -11,7 +11,7 @@ export default function Layout() {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="movie/[id]"
+        <Stack.Screen name="movies/[id]"
           options={{
             headerShown: false,
           }}
