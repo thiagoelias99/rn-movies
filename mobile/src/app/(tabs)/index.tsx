@@ -11,7 +11,7 @@ export default function App() {
   const router = useRouter()
 
   const { data: movies, loading, error } = useFetch(() => fetchMovies({
-    query: 'harry potter'
+    query: undefined,
   }))
 
 

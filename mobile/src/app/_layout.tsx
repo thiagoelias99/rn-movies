@@ -1,11 +1,19 @@
-import { Stack } from "expo-router"
-import { StatusBar } from "expo-status-bar"
-import { SafeAreaView } from "react-native-safe-area-context"
 import "../global.css"
 
+import { Stack } from "expo-router"
+import { StatusBar } from "expo-status-bar"
+import * as NavigationBar from 'expo-navigation-bar'
+import { useEffect } from "react"
+
 export default function Layout() {
+
+  useEffect(() => {
+    NavigationBar.setButtonStyleAsync('light')
+    NavigationBar.setStyle('light')
+  }, [])
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <>
       <StatusBar translucent style="light" backgroundColor="#000" />
       <Stack>
         <Stack.Screen name="(tabs)"
@@ -19,6 +27,6 @@ export default function Layout() {
           }}
         />
       </Stack>
-    </SafeAreaView>
+    </>
   )
 }
