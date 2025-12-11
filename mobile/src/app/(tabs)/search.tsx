@@ -4,7 +4,7 @@ import { images } from "@/constants/images"
 import { icons } from "@/constants/icons"
 import { useRouter } from "expo-router"
 import { useFetch } from "@/hooks/use-fetch"
-import { fetchMovies } from "@/services/api"
+import { fetchMovies, updateSearchCount } from "@/services/api"
 import MovieCard from "../components/movie-card"
 import SearchBar from "../components/search-bar"
 
@@ -20,11 +20,6 @@ export default function Search() {
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await refetch()
-
-        // Call updateSearchCount only if there are results
-        if (movies?.length! > 0 && movies?.[0]) {
-          // await updateSearchCount(searchQuery, movies[0])
-        }
       } else {
         reset()
       }
@@ -32,6 +27,12 @@ export default function Search() {
 
     return () => clearTimeout(timeoutId)
   }, [searchQuery])
+
+  useEffect(() => {
+    if (movies?.length! > 0 && movies?.[0]) {
+      updateSearchCount(searchQuery, movies[0])
+    }
+  }, [movies])
 
   return (
     <View className="flex-1 bg-primary">

@@ -4,8 +4,9 @@ import { ActivityIndicator, Text, Image, ScrollView, View, FlatList } from "reac
 import SearchBar from "../components/search-bar"
 import { useRouter } from "expo-router"
 import { useFetch } from "@/hooks/use-fetch"
-import { fetchMovies } from "@/services/api"
+import { fetchMovies, fetchPopularMovies } from "@/services/api"
 import MovieCard from "../components/movie-card"
+import TrendingCard from "../components/trending-card"
 
 export default function App() {
   const router = useRouter()
@@ -13,6 +14,8 @@ export default function App() {
   const { data: movies, loading, error } = useFetch(() => fetchMovies({
     query: undefined,
   }))
+
+  const { data: popularMovies, loading: popularLoading, error: popularError } = useFetch(() => fetchPopularMovies())
 
 
   return (
@@ -36,9 +39,9 @@ export default function App() {
           className="w-12 h-10 mt-20 mb-5 mx-auto"
         />
 
-        {loading ? (
+        {loading || popularLoading ? (
           <ActivityIndicator size="large" color="#0000ff" className="mt-10 self-center" />
-        ) : error ? (
+        ) : error || popularError ? (
           <Text>Erro ao carregar filmes</Text>
         ) : (
           <View className="flex-1 mt-5">
@@ -46,6 +49,24 @@ export default function App() {
               placeholder="Buscar filmes..."
               onPress={() => router.push("/search")}
             />
+
+            {popularMovies && popularMovies.length > 0 && (
+              <>
+                <Text className="text-lg text-white font-bold mt-5 mb-3">Filmes populares</Text>
+
+                <FlatList
+                  data={popularMovies}
+                  keyExtractor={(item) => item.movieId.toString()}
+                  renderItem={({ item }) => (
+                    <TrendingCard movie={item} index={popularMovies.indexOf(item)} />
+                  )}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  className="mt-2"
+                  contentContainerStyle={{ gap: 15, paddingRight: 6 }}
+                />
+              </>
+            )}
 
             <Text className="text-lg text-white font-bold mt-5 mb-3">Últimos filmes</Text>
 
